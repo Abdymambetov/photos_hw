@@ -20,6 +20,7 @@ function User(props) {
             <h2>User name: {user.title}</h2>
             <h2>Body: {user.id}</h2>
             <img src={user.url} alt=""/>
+
         </Container>
     );
 }

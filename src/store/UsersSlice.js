@@ -52,6 +52,7 @@ const usersSlice = createSlice({
     name: 'usersSlice',
     initialState: {
         users: [],
+        favUsers:[],
         error: '',
         user: {},
         preloader: false,
@@ -69,6 +70,20 @@ const usersSlice = createSlice({
         },
         deleteAllAction: (state, action) => {
             state.users = []
+        },
+        changeFavUser:(state,action)=>{
+            let check = true
+             state.favUsers.forEach(item=>{
+                if(action.payload.id===item.id){
+                    check = false
+                }
+            })
+               if(check) {
+                state.favUsers=[...state.favUsers,action.payload]
+            } else{
+                state.favUsers = state.favUsers.filter(item=>action.payload.id!==item.id)
+            }
+           
         }
     },
     extraReducers: builder => {
@@ -87,7 +102,7 @@ const usersSlice = createSlice({
     }
 })
 
-export const {preloaderOff, preloaderOn, moreError, deleteAllAction} = usersSlice.actions
+export const {preloaderOff, preloaderOn, moreError, deleteAllAction,changeFavUser} = usersSlice.actions
 
 export default usersSlice.reducer
 
